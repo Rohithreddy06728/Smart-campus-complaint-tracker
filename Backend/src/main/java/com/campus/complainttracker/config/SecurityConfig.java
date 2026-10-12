@@ -21,8 +21,7 @@ public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    public SecurityConfig(
-            JwtAuthenticationFilter jwtAuthenticationFilter) {
+    public SecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter) {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     }
 
@@ -36,6 +35,9 @@ public class SecurityConfig {
             .sessionManagement(session -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
+                .requestMatchers(
+                    org.springframework.http.HttpMethod.OPTIONS, "/**"
+                ).permitAll()
                 .requestMatchers(
                     "/api/auth/register",
                     "/api/auth/login"
@@ -58,17 +60,13 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
 
         configuration.setAllowedOrigins(List.of(
-    "http://localhost:5173",
-    "http://localhost:5174",
-    "https://smart-campus-complaint-frontend-ptgm.onrender.com"
-));
+            "http://localhost:5173",
+            "http://localhost:5174",
+            "https://smart-campus-complaint-frontend-ptgm.onrender.com"
+        ));
 
         configuration.setAllowedMethods(List.of(
-            "GET",
-            "POST",
-            "PUT",
-            "DELETE",
-            "OPTIONS"
+            "GET", "POST", "PUT", "DELETE", "OPTIONS"
         ));
 
         configuration.setAllowedHeaders(List.of("*"));
@@ -78,7 +76,6 @@ public class SecurityConfig {
             new UrlBasedCorsConfigurationSource();
 
         source.registerCorsConfiguration("/**", configuration);
-
         return source;
     }
 }
