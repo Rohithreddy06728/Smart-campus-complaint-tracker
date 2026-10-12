@@ -1,0 +1,29 @@
+# Environment files and secrets
+.env
+.env.*
+!.env.example
+
+# Java / Maven build output
+Backend/target/
+**/target/
+
+# Node / React dependencies and builds
+Frontend/node_modules/
+Frontend/dist/
+Frontend/.vite/
+
+# Local IDE settings
+.vscode/
+.idea/
+*.iml
+
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+
+# Local application configuration containing credentials
+Backend/src/main/resources/application-local.properties
