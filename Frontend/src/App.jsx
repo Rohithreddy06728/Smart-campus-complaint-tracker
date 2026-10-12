@@ -8,7 +8,7 @@ import AuthPage from "./components/AuthPage";
 
 import "./App.css";
 
-const API_URL = "http://localhost:8080/api/complaints";
+const API_URL = `${import.meta.env.VITE_API_URL}/api/complaints`;
 
 const CATEGORIES = [
 
